@@ -1,0 +1,42 @@
+version: '3'
+services:
+  api:
+    container_name: oceandb_api
+    build:
+      context: ./app/.
+      dockerfile: Dockerfile
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    volumes:
+      - ./app/:/app
+    ports:
+      - "8000:8000"
+    # env_file:
+    #   # - ./dabtechblog/dabtechblog/.env.test
+    depends_on:
+      - db
+      # - redis
+    links:
+      - db
+      # - redis
+  db:
+    container_name: oceandb_db
+    image: postgres:13
+    volumes:
+      - pg_oceandb_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: oceandb_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123_Test
+    ports:
+      - '5432:5432'
+  redis:
+    container_name: oceandb_redis_db
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - oceandb_redis_data:/data
+volumes:
+  pg_oceandb_data:
+  oceandb_redis_db:
