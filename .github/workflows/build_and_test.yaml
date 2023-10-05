@@ -1,0 +1,42 @@
+name: Build and test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  Build:
+    runs-on: debian-latest
+
+    steps:
+      - name: Checkout the code
+      - uses: actions/checkout@v3
+      - name: Build
+        run: make build
+  Linting:
+    runs-on: debian-latest
+    steps:
+      - name: Checkout the code
+      - uses: actions/checkout@v3
+      - name: Linting
+        run: make linting
+  Test:
+    runs-on: debian-latest
+    steps:
+      - name: Checkout the code
+      - uses: actions/checkout@v3
+      - name: Run tests
+        run: make test
+  Deploy:
+    runs-on: debian-latest
+    # Move forward only on main branch
+    if: ${{ github.ref == 'refs/heads/main' }}
+    # Move forward only if all jobs above are successed
+    needs: [ Build, Linting, Test]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Deploy
+        run: echo "Deploying placeholder"
