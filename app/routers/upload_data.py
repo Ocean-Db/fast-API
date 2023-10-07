@@ -1,9 +1,8 @@
-from fastapi import APIRouter
-from fastapi import UploadFile
+from fastapi import APIRouter, UploadFile
 
 router = APIRouter()
 
 
-@router.post("/uploadfile/")
+@router.post('/uploadfile/')
 async def create_upload_file(file: UploadFile):
-    return {"filename": file.filename}
+    return {'filename': file.filename}

@@ -12,6 +12,6 @@ class DBCredentials(BaseModel):
     port: int
 
 
-@router.post("/connect_db/")
+@router.post('/connect_db/')
 async def connect_db(credentials: DBCredentials) -> DBCredentials:
     return credentials
