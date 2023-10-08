@@ -5,4 +5,4 @@ linting:
 	pre-commit run -a
 
 test:
-	pytest
+	PYTHONPATH=${PYTHONPATH}:./app pytest
