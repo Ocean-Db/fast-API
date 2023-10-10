@@ -12,6 +12,11 @@ pydantic = "*"
 python-multipart = "*"
 httpx = "*"
 uvicorn = "*"
+sqlalchemy = "^2.0.21"
+pymysql = "^1.1.0"
+psycopg2 = "^2.9.9"
+boto3 = "^1.28.62"
+python-dotenv = "^1.0.0"
 
 
 [tool.poetry.group.dev.dependencies]

@@ -1,17 +1,11 @@
 from fastapi import APIRouter
-from pydantic import BaseModel, IPvAnyAddress
+
+from . import database, schemas
 
 router = APIRouter()
 
 
-class DBCredentials(BaseModel):
-    username: str
-    password: str
-    db_name: str
-    host: IPvAnyAddress
-    port: int
-
-
 @router.post('/connect_db/')
-async def connect_db(credentials: DBCredentials) -> DBCredentials:
+async def connect_db(credentials: schemas.DBCredentials) -> schemas.DBCredentials:
+    database.create_db_connection(credentials)
     return credentials
