@@ -11,16 +11,6 @@ repos:
     -   id: check-merge-conflict
     -   id: debug-statements
     -   id: double-quote-string-fixer
-# Update requirements.txt
--   repo: local
-    hooks:
-    -   id: update-requirements-txt
-        name: update-requirements-txt
-        description: 'Generate requirements.txt based on poetry.lock'
-        entry: poetry
-        args: [ export, --format, requirements.txt, --output, requirements.txt ]
-        language: system
-        pass_filenames: false
 # autopep8
 -   repo: https://github.com/pre-commit/mirrors-autopep8
     rev: v2.0.4
