@@ -1,4 +1,6 @@
-from pydantic import BaseModel, IPvAnyAddress
+from pydantic import BaseModel
+
+
 class DBCredentials(BaseModel):
     db_server: str
     username: str
