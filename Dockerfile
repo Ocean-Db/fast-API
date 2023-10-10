@@ -4,24 +4,22 @@ FROM python:3.11-alpine
 
 
 WORKDIR /app
-
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
 COPY /app .
+COPY pyproject.toml .
 
-ENV USER=docker
-ENV UID=12345
-ENV GID=23456
+RUN pip install poetry
+RUN poetry install --no-interaction --no-ansi --no-cache --no-root --no-directory --only main
 
+ARG UID=10001
 RUN adduser \
     --disabled-password \
     --gecos "" \
-    --home "$(pwd)" \
-    --ingroup "$USER" \
+    --home "/nonexistent" \
+    --shell "/sbin/nologin" \
     --no-create-home \
-    --uid "$UID" \
-    "$USER"
+    --uid "${UID}" \
+    appuser
 
+USER appuser
 
-USER docker
+ENTRYPOINT ["poetry", "run", "python3", "main.py"]
