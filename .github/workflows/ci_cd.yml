@@ -41,14 +41,15 @@ jobs:
     name: Push Docker image to Hub
     runs-on: ubuntu-latest
     needs: [ linting, test ]
+    env:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+    if: |
+      env.DOCKER_USERNAME != null
+      && env.DOCKER_PASSWORD != null
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
-      - env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      - if: env.DOCKER_USERNAME != null
-      - if: env.DOCKER_PASSWORD != null
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
