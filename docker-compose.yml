@@ -1,0 +1,11 @@
+services:
+  web:
+    image: oceandb/backend:latest
+    ports:
+      - "8000:5000"
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "1"   # number of files or file count
+        max-size: "100k" # file size
