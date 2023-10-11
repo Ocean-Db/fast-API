@@ -38,7 +38,7 @@ jobs:
           PYTHONPATH=${PYTHONPATH}:./app poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
 
   build_and_push:
-    name: Push Docker image to Docker Hub
+    name: Push Docker image to Hub
     runs-on: ubuntu-latest
     needs: [ linting, test ]
     steps:
@@ -66,14 +66,28 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-  Deploy:
+  deploy:
     runs-on: ubuntu-latest
-    # Move forward only on main branch
     if: ${{ github.ref == 'refs/heads/main' }}
-    # Move forward only if all jobs above are successed
     needs: [ build_and_push ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Deploy
-        run: echo "Deploying placeholder"
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          source: "docker-compose.yml"
+          target: .
+      - name: run docker-compose
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            docker-compose down
+            docker-compose pull
+            docker-compose up -d
