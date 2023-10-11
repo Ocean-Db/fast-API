@@ -17,7 +17,7 @@ pymysql = "^1.1.0"
 psycopg2-binary = "*"
 boto3 = "^1.28.62"
 python-dotenv = "^1.0.0"
-
+pyspark = "^3.5.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "*"
