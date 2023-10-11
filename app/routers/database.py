@@ -1,7 +1,6 @@
 from sqlalchemy import URL, create_engine
 from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 from . import schemas
 

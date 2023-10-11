@@ -1,7 +1,5 @@
-from pyspark.sql import SparkSession
 from dotenv import load_dotenv
-from .clean_data import clean
-from .data_convert import convert
+from pyspark.sql import SparkSession
 
 
 def create_spark_session():
@@ -10,10 +8,10 @@ def create_spark_session():
     _ = load_dotenv()
     return SparkSession\
         .builder\
-        .appName("OceanDB-Backend")\
-        .master("local[2]")\
+        .appName('OceanDB-Backend')\
+        .master('local[2]')\
         .getOrCreate()
-    
+
 
 class FileLoader:
     def __init__(self, spark):
@@ -29,11 +27,11 @@ class FileLoader:
         Returns:
             pyspark.sql.types.StructType: Schema of the DataFrame.
         """
-        df = self.spark.read.format("com.crealytics.spark.excel") \
-            .option("location", file_path) \
-            .option("useHeader", "true") \
+        df = self.spark.read.format('com.crealytics.spark.excel') \
+            .option('location', file_path) \
+            .option('useHeader', 'true') \
             .load()
-        return df,df.schema
+        return df, df.schema
 
     def load_csv(self, file_path):
         """
@@ -45,7 +43,7 @@ class FileLoader:
         Returns:
             pyspark.sql.types.StructType: Schema of the DataFrame.
         """
-        df = self.spark.read.option("header", "true") \
-            .option("inferSchema", "true") \
+        df = self.spark.read.option('header', 'true') \
+            .option('inferSchema', 'true') \
             .csv(file_path)
-        return df,df.schema
+        return df, df.schema
