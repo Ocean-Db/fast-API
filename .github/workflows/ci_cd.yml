@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install dependencies
-        run: python -m pip install --upgrade pip setuptools wheel poetry pre-commit
+        run: python -m pip install --upgrade pip setuptools wheel pre-commit
       - name: Linting
         run: make linting
 
@@ -35,7 +35,8 @@ jobs:
 
       - name: Run tests
         run: |
-          PYTHONPATH=${PYTHONPATH}:./app poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+          poetry install
+          make test
 
   build_and_push:
     name: Push Docker image to Hub
