@@ -7,21 +7,28 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-fastapi = "^0.103.1"
-pydantic = "^2.3.0"
-python-multipart = "^0.0.6"
-httpx = "^0.25.0"
-uvicorn = "^0.23.2"
+fastapi = "*"
+pydantic = "*"
+python-multipart = "*"
+httpx = "*"
+uvicorn = "*"
 sqlalchemy = "^2.0.21"
 pymysql = "^1.1.0"
-psycopg2 = "^2.9.9"
+psycopg2-binary = "*"
 boto3 = "^1.28.62"
 python-dotenv = "^1.0.0"
-
+pyspark = "^3.5.0"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.4.2"
-faker = "^19.6.2"
+pytest = "*"
+faker = "*"
+pre-commit = "*"
+pytest-cov = "*"
+
+[tool.pytest.ini_options]
+testpaths = [
+  "tests",
+]
 
 [build-system]
 requires = ["poetry-core"]
