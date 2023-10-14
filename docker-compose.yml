@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  api_oceandb:
+    build: .
+    command: uvicorn app.main:app --host 0.0.0.0
+    volumes:
+      - .:/app
+    ports:
+      - 8080:8080
