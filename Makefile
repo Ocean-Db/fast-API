@@ -6,6 +6,3 @@ linting:
 
 test:
 	PYTHONPATH=${PYTHONPATH}:./app pytest
-
-compose:
-	docker compose up

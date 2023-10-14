@@ -17,7 +17,7 @@ class FileLoader:
     def __init__(self, spark):
         self.spark = spark
 
-    def load_excel(self, file_path):
+    def load_excel(self, file_path: str):
         """
         Load an Excel file and return the schema of the DataFrame and its schema.
 

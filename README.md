@@ -12,10 +12,6 @@ poetry update
 ###### Install pre-commit hooks
 
 ```
-sudo apt install pre-commit
-```
-
-```
 pre-commit install
 ```
 
