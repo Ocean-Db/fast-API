@@ -18,8 +18,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    env_file:
-      - .env
     volumes:
       - ./nginx:/etc/nginx/user_conf.d:ro
       - letsencrypt:/etc/letsencrypt
