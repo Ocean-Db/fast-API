@@ -10,7 +10,6 @@ python = "^3.11"
 fastapi = "*"
 pydantic = "*"
 python-multipart = "*"
-httpx = "*"
 uvicorn = "*"
 sqlalchemy = "^2.0.21"
 pymysql = "^1.1.0"
@@ -24,6 +23,7 @@ pytest = "*"
 faker = "*"
 pre-commit = "*"
 pytest-cov = "*"
+httpx = "*"
 
 [tool.pytest.ini_options]
 testpaths = [
