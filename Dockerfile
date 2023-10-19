@@ -6,7 +6,7 @@ ENV POETRY_VIRTUALENVS_IN_PROJECT=true
 # install [tool.poetry.dependencies]
 # this will install virtual environment into /.venv because of POETRY_VIRTUALENVS_IN_PROJECT=true
 # see: https://python-poetry.org/docs/configuration/#virtualenvsin-project
-COPY ./poetry.lock ./pyproject.toml /application_root/
+COPY ./pyproject.toml /application_root/
 WORKDIR /application_root/
 RUN poetry install --no-interaction --no-root --without dev
 
