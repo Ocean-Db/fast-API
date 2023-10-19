@@ -20,7 +20,6 @@ services:
       - "443:443"
     environment:
       - CERTBOT_EMAIL: "ndubuisipeter7@gmail.com"
-
     volumes:
       - ./nginx:/etc/nginx/user_conf.d:ro
       - letsencrypt:/etc/letsencrypt
