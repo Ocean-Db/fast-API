@@ -13,7 +13,7 @@ services:
 
   nginx:
     restart: unless-stopped
-    image: jonasal/nginx-certbot:4-alpine
+    image: jonasal/nginx-certbot:5-alpine
     container_name: nginx
     ports:
       - "80:80"
@@ -21,7 +21,7 @@ services:
     environment:
       - CERTBOT_EMAIL=ndubuisipeter7@gmail.com
     volumes:
-      - ./nginx:/etc/nginx/user_conf.d:ro
+      - nginx.conf:/etc/nginx/user_conf.d/nginx.conf:ro
       - letsencrypt:/etc/letsencrypt
     depends_on:
       - web
