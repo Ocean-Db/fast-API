@@ -30,4 +30,5 @@ COPY --chown=appuser:appuser --from=dependencies-build-stage /application_root/.
 # Copy application files
 COPY --chown=appuser:appuser /app /application_root/app/
 
-ENTRYPOINT ["poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--bind", "/application_root/app/sockets/app.sock"]
+ENTRYPOINT ["poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--forwarded-allow-ips='*'", "--bind", "/application_root/app/sockets/app.sock"]
+
