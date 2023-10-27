@@ -1,11 +1,36 @@
 services:
   web:
     image: oceandb/backend:latest
+    container_name: web
     ports:
-      - "8000:5000"
+      - "8000:8000"
     restart: unless-stopped
     logging:
       driver: "json-file"
       options:
-        max-file: "1"   # number of files or file count
-        max-size: "100k" # file size
+        max-file: "1"
+        max-size: "100k"
+
+  nginx:
+    restart: unless-stopped
+    image: jonasal/nginx-certbot:5-alpine
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - CERTBOT_EMAIL=ndubuisipeter7@gmail.com
+    volumes:
+      - nginx.conf:/etc/nginx/user_conf.d/nginx.conf:ro
+      - letsencrypt:/etc/letsencrypt
+    depends_on:
+      - web
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100k"
+        max-file: "1"
+
+
+volumes:
+  letsencrypt:
