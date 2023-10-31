@@ -4,6 +4,8 @@ services:
     container_name: web
     ports:
       - "8000:8000"
+    volumes:
+      - app.sock:/application_root/app/sockets/app.sock
     restart: unless-stopped
     logging:
       driver: "json-file"
