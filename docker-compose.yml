@@ -1,6 +1,6 @@
 services:
   web:
-    image: web:latest
+    image: oceandb/backend:latest
     container_name: web
     ports:
       - "8000:8000"
